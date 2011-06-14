@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+
+binary-install/yjpagent::
+ifeq ($(DEB_BUILD_ARCH),i386)
+	dh_install linux-x86-32/libyjpagent.so usr/lib/yjp/
+else
+ifeq ($(DEB_BUILD_ARCH),amd64)
+	dh_install linux-x86-64/libyjpagent.so usr/lib/yjp/
+else
+	echo "Invalid Arch: $(DEB_BUILD_ARCH)"
+	exit 1
+endif
+endif
